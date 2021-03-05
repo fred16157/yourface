@@ -2,6 +2,15 @@
 
 니얼굴은 실시간으로 카메라에 비춰지는 사람의 얼굴에 이미지를 표시해주는 프로그램입니다.
 
+## 실행 조건
+
+- Python 3.8 이상(그 이하는 작동을 보장하지 않음)
+- opencv-python 라이브러리 설치
+
+```bash
+pip install opencv-python
+```
+
 ## 사용법
 
 show_realtime_detection.py를 실행하면 0번 카메라를 사용하며 버튼으로 상호작용할 수 있습니다.
