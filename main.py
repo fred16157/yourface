@@ -52,7 +52,7 @@ class MainApp(App) :
         img = cv2.flip(img, 1)
         result = None
         if self.overlayMode :
-            if self.overlay is None and self.overlayPath is not "":
+            if self.overlay is None and self.overlayPath != "":
                 try :
                     self.overlay = cv2.imread(self.overlayPath, -1)
                     result = show_realtime_detection.show_realtime_detection(img, None, overlayMode=False)

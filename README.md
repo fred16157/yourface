@@ -5,10 +5,12 @@
 ## 실행 조건
 
 - Python 3.8 이상(그 이하는 작동을 보장하지 않음)
-- opencv-python 라이브러리 설치
+- Anaconda 환경
+- opencv-python, kivy 라이브러리 설치
 
 ```bash
 pip install opencv-python
+conda install kivy[full]
 ```
 
 ## 사용법

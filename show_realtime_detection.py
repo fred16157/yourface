@@ -15,11 +15,11 @@ def show_realtime_detection(img, overlay, overlayMode = True) :
         minSize=(10, 10)
     )
     for (x,y,w,h) in faces:
-        print('face detected')
+        print(x, y, w, h)
             
         cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),2)
         cv2.putText(img, "Detected Face", (x-5, y-5), font, 0.5, (255,255,0),2)
-                
+        
         if overlayMode : 
             overlayResized = cv2.resize(overlay, dsize=(w, h), interpolation=cv2.INTER_AREA)
             y1, y2 = y, y + overlayResized.shape[0]
