@@ -1,0 +1,22 @@
+#:kivy 2.0.0
+#:import Factory kivy.factory.Factory
+
+BoxLayout:
+    orientation: 'vertical'
+    Image:
+        id: imageView
+        allow_stretch: True
+        canvas.before:
+            Color:
+                rgba: 0, 0, 0, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+<SettingsPopup@Popup>:
+    title: '설정'
+    size_hint: (None, None)
+    size: (400, 400)
+    Button:
+        text: '확인'
+        on_release: root.dismiss()

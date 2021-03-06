@@ -3,11 +3,10 @@ import cv2
 import sys
 
 faceCascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
-def show_realtime_detection(cap, overlay, overlayMode = True) :
+def show_realtime_detection(img, overlay, overlayMode = True) :
     
     font = cv2.FONT_ITALIC
-    ret, img = cap.read()
-    img = cv2.flip(img, 1)
+    
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     faces = faceCascade.detectMultiScale(
         gray,     
@@ -48,11 +47,13 @@ if __name__ == '__main__' :
 
     overlay = cv2.imread(sys.argv[1], -1)
     while True :
-        cv2.imshow('video', show_realtime_detection(cap, overlay, overlayMode))
+        ret, img = cap.read()
+        img = cv2.flip(img, 1)
+        cv2.imshow('video', show_realtime_detection(img, overlay, overlayMode))
         k = cv2.waitKey(1) & 0xff
         if k == 27: # press 'ESC' to 
             break
-        elif k == 95:
+        elif k == 97 or k == 65:
             overlayMode = not overlayMode
             print('Overlay Mode = ', overlayMode)
 
