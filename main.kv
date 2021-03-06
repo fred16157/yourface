@@ -1,5 +1,4 @@
 #:kivy 2.0.0
-#:import Factory kivy.factory.Factory
 
 BoxLayout:
     orientation: 'vertical'
@@ -13,10 +12,30 @@ BoxLayout:
                 pos: self.pos
                 size: self.size
 
-<SettingsPopup@Popup>:
-    title: '설정'
+<SettingsPopup>:
+    title: 'Settings'
     size_hint: (None, None)
     size: (400, 400)
-    Button:
-        text: '확인'
-        on_release: root.dismiss()
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text_size: self.size
+            valign: "middle"
+            padding_x: 5
+            text: "Overlay on faces"
+        CheckBox:
+            height: dp(20)
+            id: overlayModeCheckbox
+        Label:
+            text_size: self.size
+            valign: "middle"
+            padding_x: 5
+            text: "Overlay Path"
+        TextInput:
+            id: overlayPathInput
+        Button:
+            id: overlayPathPickerButton
+            text: 'Choose...'
+        Button:
+            id: confirmButton
+            text: 'Confirm'
