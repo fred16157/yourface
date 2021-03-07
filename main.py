@@ -13,10 +13,10 @@ import show_realtime_detection
 
 class MainApp(App) :
     def on_start(self):
-        self.cap = cv2.VideoCapture(0)
+        self.cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
         self.cap.set(3,640) # set Width
         self.cap.set(4,480) # set Height
-        self.overlayMode = True
+        self.overlayMode = False
         self.overlayPath = ""
         self.overlay = None
         Clock.schedule_interval(self.update, 1.0/30.0)
@@ -45,6 +45,10 @@ class MainApp(App) :
     def confirm_changes(self, _) :
         self.overlayMode = self.popup.ids.overlayModeCheckbox.active
         self.overlayPath = self.popup.ids.overlayPathInput.text
+        try:
+            self.overlay = cv2.imread(self.overlayPath, -1)
+        except: 
+            self.overlay = None
         self.popup.dismiss()
 
     def update(self, dt) :

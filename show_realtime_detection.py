@@ -4,9 +4,8 @@ import sys
 
 faceCascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
 def show_realtime_detection(img, overlay, overlayMode = True) :
-    
+    mh, mw = img.shape[:2]
     font = cv2.FONT_ITALIC
-    
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     faces = faceCascade.detectMultiScale(
         gray,     
@@ -15,8 +14,6 @@ def show_realtime_detection(img, overlay, overlayMode = True) :
         minSize=(10, 10)
     )
     for (x,y,w,h) in faces:
-        print(x, y, w, h)
-            
         cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),2)
         cv2.putText(img, "Detected Face", (x-5, y-5), font, 0.5, (255,255,0),2)
         
@@ -40,7 +37,7 @@ if __name__ == '__main__' :
     if len(sys.argv) < 2 :
         print('Please specify overlay image path')
         exit()
-    cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
     overlayMode = True
     cap.set(3,640) # set Width
     cap.set(4,480) # set Height
