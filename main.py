@@ -14,8 +14,10 @@ import show_realtime_detection
 class MainApp(App) :
     def on_start(self):
         self.cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
-        self.cap.set(3,640) # set Width
-        self.cap.set(4,480) # set Height
+        self.cameraWidth = 640
+        self.cameraHeight = 480
+        self.cap.set(3, self.cameraWidth) # set Width
+        self.cap.set(4, self.cameraHeight) # set Height
         self.overlayMode = False
         self.overlayPath = ""
         self.overlay = None
@@ -33,6 +35,8 @@ class MainApp(App) :
             self.popup = SettingsPopup()
             self.popup.ids.overlayModeCheckbox.active = self.overlayMode
             self.popup.ids.overlayPathInput.text = self.overlayPath
+            self.popup.ids.imageWidthInput.text = str(self.cameraWidth)
+            self.popup.ids.imageHeightInput.text = str(self.cameraHeight)
             self.popup.ids.overlayPathPickerButton.bind(on_release=self.open_file_picker)  
             self.popup.ids.confirmButton.bind(on_release=self.confirm_changes)
             self.popup.open()
@@ -48,10 +52,31 @@ class MainApp(App) :
         try:
             self.overlay = cv2.imread(self.overlayPath, -1)
         except: 
+            print('Error occured during loading overlay image')
             self.overlay = None
+        self.cap.release()
+        self.cap = None
+        try:
+            self.cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
+            self.cameraWidth = int(self.popup.ids.imageWidthInput.text)
+            self.cameraHeight = int(self.popup.ids.imageHeightInput.text)
+            self.cap.set(3, self.cameraWidth)
+            self.cap.set(4, self.cameraHeight)
+        except:
+            print('Error occured during setting image size')
+            if self.cap is None or not self.cap.isOpened():
+                self.cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
+            
+            self.cameraWidth = 640
+            self.cameraHeight = 480
+            self.cap.set(3, self.cameraWidth)
+            self.cap.set(4, self.cameraHeight)
+        
         self.popup.dismiss()
 
     def update(self, dt) :
+        if self.cap is None or not self.cap.isOpened():
+            return
         ret, img = self.cap.read()
         img = cv2.flip(img, 1)
         result = None

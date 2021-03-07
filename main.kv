@@ -30,12 +30,27 @@ BoxLayout:
             text_size: self.size
             valign: "middle"
             padding_x: 5
-            text: "Overlay Path"
+            text: "Overlay path"
         TextInput:
             id: overlayPathInput
         Button:
             id: overlayPathPickerButton
             text: 'Choose...'
+        Label:
+            text_size: self.size
+            valign: "middle"
+            padding_x: 5
+            text: "Image width"
+        TextInput:
+            id: imageWidthInput
+        Label:
+            text_size: self.size
+            valign: "middle"
+            padding_x: 5
+            text: "Image height"
+        TextInput:
+            id: imageHeightInput
+        
         Button:
             id: confirmButton
             text: 'Confirm'
