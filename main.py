@@ -26,8 +26,12 @@ class MainApp(App) :
         self.keyboard.bind(on_key_down=self.on_keyboard_down)
 
     def keyboard_closed(self):
+        print('Keyboard closed')
         self.keyboard.unbind(on_key_down=self.on_keyboard_down)
         self.keyboard = None
+        self.keyboard = Window.request_keyboard(self.keyboard_closed, self)
+        self.keyboard.bind(on_key_down=self.on_keyboard_down)
+
 
     def on_keyboard_down(self, keyboard, keycode, text, modifiers) :
         if keycode[1] == 'f8':
