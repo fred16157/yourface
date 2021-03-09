@@ -22,5 +22,3 @@ python show_realtime_detection.py (이미지 경로)
 ```
 
 ![사용법](/assets/yourface.gif)
-
-테스트에 사용된 얼굴은 리포지토리 주인의 얼굴입니다.
