@@ -21,4 +21,12 @@ show_realtime_detection.py를 실행하면 0번 카메라를 사용하여 얼굴
 python show_realtime_detection.py (이미지 경로)
 ```
 
+GUI 버전을 사용하려면 main.py를 실행해면 됩니다.
+
+```bash
+python main.py
+```
+
+F8키로 설정 화면을 불러올 수 있습니다.
+
 ![사용법](/assets/yourface.gif)
